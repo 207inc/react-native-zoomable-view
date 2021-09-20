@@ -1,0 +1,22 @@
+{
+  "name": "react-native-zoomable-view-example",
+  "displayName": "ZoomableView Example",
+  "expo": {
+    "name": "react-native-zoomable-view-example",
+    "slug": "react-native-zoomable-view-example",
+    "description": "Example app for react-native-zoomable-view",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
