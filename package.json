@@ -1,6 +1,6 @@
 {
   "name": "react-native-zoomable-view",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Zoomable View or Image on React Native with reanimated v2",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -34,7 +34,11 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "zoom",
+    "pinch",
+    "zoomable",
+    "image"
   ],
   "repository": "https://github.com/207inc/react-native-zoomable-view",
   "author": "207inc <h.wakatsuki@tenova.jp> (https://github.com/207inc)",
