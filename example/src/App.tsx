@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import ZoomableView from 'react-native-zoomable-view';
 import { StyleSheet, Image } from 'react-native';
+import { ZoomableView } from 'src/ZoomableView';
 
 const styles = StyleSheet.create({
   image: {
