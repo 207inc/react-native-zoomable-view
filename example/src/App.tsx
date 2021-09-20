@@ -1,31 +1,22 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
 import ZoomableView from 'react-native-zoomable-view';
-
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    ZoomableView.multiply(3, 7).then(setResult);
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
-  );
-}
+import { StyleSheet, Image } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  image: {
+    width: 300,
+    height: 500,
   },
 });
+
+const imageUrl =
+  'https://images.unsplash.com/photo-1599229526921-4f29d42b0b41?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=716&q=80';
+
+export default function App() {
+  return (
+    <ZoomableView>
+      <Image style={styles.image} source={{ uri: imageUrl }} />
+    </ZoomableView>
+  );
+}

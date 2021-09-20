@@ -1,5 +1,3 @@
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
+import type { ZoomableView } from './ZoomableView';
+
+export default ZoomableView;
