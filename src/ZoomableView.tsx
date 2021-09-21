@@ -38,6 +38,8 @@ export const ZoomableView: React.FC<ZoomableViewProps> = ({ children }) => {
   const transitionX = useSharedValue(0);
   const transitionY = useSharedValue(0);
   const { width } = useWindowDimensions();
+  const imagePinch = React.createRef();
+  const imageRotation = React.createRef();
 
   const pinchHandler =
     useAnimatedGestureHandler<PinchGestureHandlerGestureEvent>({
@@ -82,9 +84,17 @@ export const ZoomableView: React.FC<ZoomableViewProps> = ({ children }) => {
   return (
     <PanGestureHandler onGestureEvent={panHandler}>
       <Animated.View>
-        <PinchGestureHandler onGestureEvent={pinchHandler}>
+        <PinchGestureHandler
+          ref={imagePinch}
+          simultaneousHandlers={imageRotation}
+          onGestureEvent={pinchHandler}
+        >
           <Animated.View style={{ width }}>
-            <RotationGestureHandler onGestureEvent={roteteHandler}>
+            <RotationGestureHandler
+              ref={imageRotation}
+              simultaneousHandlers={imagePinch}
+              onGestureEvent={roteteHandler}
+            >
               <Animated.View
                 style={[styles.container, rStyle]}
                 collapsable={false}
