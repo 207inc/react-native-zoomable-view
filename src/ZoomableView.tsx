@@ -12,6 +12,7 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from 'react-native-reanimated';
 
 const styles = StyleSheet.create({
@@ -40,6 +41,7 @@ export const ZoomableView: React.FC<ZoomableViewProps> = ({ children }) => {
   const { width } = useWindowDimensions();
   const imagePinch = React.createRef();
   const imageRotation = React.createRef();
+  const imagePan = React.createRef();
 
   const pinchHandler =
     useAnimatedGestureHandler<PinchGestureHandlerGestureEvent>({
@@ -48,12 +50,18 @@ export const ZoomableView: React.FC<ZoomableViewProps> = ({ children }) => {
         focalX.value = event.focalX;
         focalY.value = event.focalY;
       },
+      onEnd: () => {
+        scale.value = 1;
+      },
     });
 
   const roteteHandler =
     useAnimatedGestureHandler<RotationGestureHandlerGestureEvent>({
       onActive: (event) => {
-        rotate.value = event.rotation * 180;
+        rotate.value = event.rotation * 90;
+      },
+      onEnd: () => {
+        rotate.value = withSpring(0);
       },
     });
 
@@ -61,6 +69,10 @@ export const ZoomableView: React.FC<ZoomableViewProps> = ({ children }) => {
     onActive: (event) => {
       transitionX.value = -event.translationX;
       transitionY.value = -event.translationY;
+    },
+    onEnd: () => {
+      transitionX.value = withSpring(0);
+      transitionY.value = withSpring(0);
     },
   });
 
@@ -82,17 +94,21 @@ export const ZoomableView: React.FC<ZoomableViewProps> = ({ children }) => {
   }));
 
   return (
-    <PanGestureHandler onGestureEvent={panHandler}>
+    <PanGestureHandler
+      simultaneousHandlers={[imagePinch, imageRotation]}
+      onGestureEvent={panHandler}
+      ref={imagePan}
+    >
       <Animated.View>
         <PinchGestureHandler
           ref={imagePinch}
-          simultaneousHandlers={imageRotation}
+          simultaneousHandlers={[imagePan, imageRotation]}
           onGestureEvent={pinchHandler}
         >
           <Animated.View style={{ width }}>
             <RotationGestureHandler
               ref={imageRotation}
-              simultaneousHandlers={imagePinch}
+              simultaneousHandlers={[imagePan, imagePinch]}
               onGestureEvent={roteteHandler}
             >
               <Animated.View
