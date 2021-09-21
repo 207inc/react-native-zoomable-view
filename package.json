@@ -1,6 +1,6 @@
 {
   "name": "react-native-zoomable-view",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Zoomable View or Image on React Native with reanimated v2",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
